@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess the Number Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <div class="container text-center mt-5">
+    <h1>Guess the Number Game</h1>
+    <p class="lead">I'm thinking of a number between 1 and 100. Can you guess it?</p>
+
+    <input type="number" id="guessInput" class="form-control w-50 mx-auto mb-3" placeholder="Enter your guess" min="1" max="100">
+    <button onclick="checkGuess()" class="btn btn-primary mb-3">Submit</button>
+
+    <p id="feedback" class="fs-5"></p>
+    <p id="attempts" class="text-muted"></p>
+  </div>
+
+  <script>
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    let tries = 0;
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById("guessInput").value);
+      tries++;
+
+      if (guess === secretNumber) {
+        document.getElementById("feedback").textContent = `Congratulations! You guessed it in ${tries} tries.`;
+        document.getElementById("feedback").className = "text-success fs-4";
+      } else if (guess < secretNumber) {
+        document.getElementById("feedback").textContent = "Too low! Try again.";
+        document.getElementById("feedback").className = "text-warning";
+      } else if (guess > secretNumber) {
+        document.getElementById("feedback").textContent = "Too high! Try again.";
+        document.getElementById("feedback").className = "text-warning";
+      }
+
+      document.getElementById("attempts").textContent = `Attempts: ${tries}`;
+    }
+  </script>
+
+</body>
+</html>
